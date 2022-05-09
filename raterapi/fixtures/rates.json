@@ -1,0 +1,12 @@
+[
+    {
+        "model": "raterapi.rate",
+        "pk": 1,
+        "fields": {
+            "rate": 3,
+            "game_id": 1,
+            "player_id": 1
+        }
+    }
+    
+]

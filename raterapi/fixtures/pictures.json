@@ -1,0 +1,13 @@
+[
+    {
+        "model": "raterapi.picture",
+        "pk": 1,
+        "fields": {
+            "link": "https://image.shutterstock.com/image-photo/caribbean-sea-surface-summer-wave-260nw-400278007.jpg",
+            "caption": "sea",
+            "game_id": 1,
+            "player_id": 1
+        }
+    }
+    
+]

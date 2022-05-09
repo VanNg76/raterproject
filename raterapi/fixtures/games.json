@@ -1,0 +1,30 @@
+[
+    {
+        "model": "raterapi.game",
+        "pk": 1,
+        "fields": {
+            "title": "Clash of Clans",
+            "description": "CoC",
+            "designer": "CoC designed",
+            "year_released": 2005,
+            "number_of_players": 4,
+            "estimate_time_to_play": 30,
+            "age_recommendation": 15,
+            "player_id": 1
+        }
+    },
+    {
+        "model": "raterapi.game",
+        "pk": 2,
+        "fields": {
+            "title": "Caro",
+            "description": "Caro game",
+            "designer": "Caro designed",
+            "year_released": 1995,
+            "number_of_players": 2,
+            "estimate_time_to_play": 5,
+            "age_recommendation": 10,
+            "player_id": 1
+        }
+    }
+]

@@ -1,6 +1,6 @@
 from django.db import models
 
-from .player import Player
+# from .player import Player
 
 
 class Game(models.Model):
@@ -12,4 +12,5 @@ class Game(models.Model):
     number_of_players = models.IntegerField()
     estimate_time_to_play = models.IntegerField()
     age_recommendation = models.IntegerField()
-    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    player = models.ForeignKey("Player", on_delete=models.CASCADE)
+    categories = models.ManyToManyField("Category")
