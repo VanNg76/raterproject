@@ -1,0 +1,12 @@
+[
+    {
+        "model": "raterapi.review",
+        "pk": 1,
+        "fields": {
+            "review": "good",
+            "game_id": 1,
+            "player_id": 1
+        }
+    }
+    
+]

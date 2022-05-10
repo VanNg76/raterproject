@@ -1,0 +1,10 @@
+[
+    {
+        "model": "rater.player",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "bio": "Van C54"
+        }
+    }
+]
