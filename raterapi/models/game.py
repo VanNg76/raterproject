@@ -1,5 +1,7 @@
 from django.db import models
 
+from raterapi.models.rate import Rate
+
 # from .player import Player
 
 
@@ -14,3 +16,27 @@ class Game(models.Model):
     age_recommendation = models.IntegerField()
     player = models.ForeignKey("Player", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category")
+
+    @property
+    def is_creator(self):
+        return self.__is_creator
+
+    @is_creator.setter
+    def is_creator(self, value):
+        self.__is_creator = value
+
+    @property
+    def average_rating(self):
+        """Average rating calculated attribute for each game"""
+        ratings = Rate.objects.filter(game=self)
+
+        # Sum all of the ratings for the game
+        total_rating = 0
+        for rating in ratings:
+            total_rating += rating.rate
+
+        # Calculate the average and return it.
+        if len(ratings) == 0:
+            return 0
+        else:
+            return total_rating / len(ratings)

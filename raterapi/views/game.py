@@ -3,6 +3,7 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
+from rest_framework.decorators import action
 
 # use in create to validate receiving errors
 # from django.core.exceptions import ValidationError
@@ -20,6 +21,10 @@ class GameView(ViewSet):
         """
         try:
             game = Game.objects.get(pk=pk)
+            if game.player_id == request.auth.user.id:
+                game.is_creator = True
+            else:
+                game.is_creator = False
             serializer = GameSerializer(game)
             return Response(serializer.data)
         except Game.DoesNotExist as ex:
@@ -31,6 +36,13 @@ class GameView(ViewSet):
             Response -- JSON serialized list of game
         """
         games = Game.objects.all()
+        
+        for game in games:
+            if game.player_id == request.auth.user.id:
+                game.is_creator = True
+            else:
+                game.is_creator = False
+
         serializer = GameSerializer(games, many=True)
         return Response(serializer.data)
 
@@ -100,7 +112,9 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         # Using depth to embed tables: fields need to revise to
         # 'game_type''gamer' instead of 'game_type_id''gamer_id'
-        fields = ('id', 'title', 'description', 'designer', 'number_of_players', 'year_released', 'age_recommendation', 'player_id', 'estimate_time_to_play', 'categories')
+        fields = ('id', 'title', 'description', 'designer', 'number_of_players',
+                  'is_creator', 'year_released', 'age_recommendation', 'player_id',
+                  'estimate_time_to_play', 'categories', 'average_rating')
         depth = 1
 
 class CreateGameSerializer(serializers.ModelSerializer):
