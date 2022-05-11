@@ -17,21 +17,25 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
+from django.conf import settings
+from django.conf.urls.static import static
 
 from raterapi.views import register_user, login_user
 from raterapi.views import GameView
 from raterapi.views import ReviewView
 from raterapi.views import RateView
+from raterapi.views import GamePictureView
 
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'games', GameView, 'game')
 router.register(r'reviews', ReviewView, 'review')
 router.register(r'rates', RateView, 'rate')
+router.register(r'gamepictures', GamePictureView, 'gamepicture')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register', register_user),
     path('login', login_user),
     path('', include(router.urls)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
