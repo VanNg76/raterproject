@@ -30,11 +30,11 @@ class ReviewView(ViewSet):
         """
         reviews = Review.objects.all()
         game = request.query_params.get('game', None)
-        player = Player.objects.get(user=request.auth.user)
+        # player = Player.objects.get(user=request.auth.user)
         
         if game is not None:
             reviews = reviews.filter(game_id=game)
-            reviews = reviews.filter(player_id=player)
+            # reviews = reviews.filter(player_id=player)
         
         serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)

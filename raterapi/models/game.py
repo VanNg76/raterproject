@@ -40,3 +40,9 @@ class Game(models.Model):
             return 0
         else:
             return total_rating / len(ratings)
+
+class GamePicture(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.DO_NOTHING, related_name='pictures')
+    game_image = models.ImageField(
+        upload_to='gamepictures', height_field=None,
+        width_field=None, max_length=None, null=True)

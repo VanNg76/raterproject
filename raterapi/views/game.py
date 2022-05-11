@@ -1,9 +1,10 @@
-"""View module for handling requests about game types"""
+"""View module for handling requests about game"""
 # from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.decorators import action
+from django.db.models import Q  # use for search query
 
 # use in create to validate receiving errors
 # from django.core.exceptions import ValidationError
@@ -35,7 +36,20 @@ class GameView(ViewSet):
         Returns:
             Response -- JSON serialized list of game
         """
-        games = Game.objects.all()
+        
+        # filter games by search term or sort game by fieldname
+        search_text = self.request.query_params.get('q', None)
+        sort_text = self.request.query_params.get('orderby', None)
+        if search_text is not None:
+            games = Game.objects.filter(
+                Q(title__contains=search_text) |
+                Q(description__contains=search_text) |
+                Q(designer__contains=search_text)
+            )
+        elif sort_text is not None:
+            games = Game.objects.order_by(sort_text)
+        else:
+            games = Game.objects.all()
         
         for game in games:
             if game.player_id == request.auth.user.id:
