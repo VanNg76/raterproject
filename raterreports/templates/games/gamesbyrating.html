@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Top 3 Games</title>
+  </head>
+  <body>
+    <h1>Top 3 Games by Rating</h1>
+
+    {% for game in gamesbyrating_list %}
+        <h4>ID: {{ game.id }}, Title: {{game.title}} -- {{game.average_rate}}</h4>
+        
+    {% endfor %}
+    
+  </body>
+</html>
