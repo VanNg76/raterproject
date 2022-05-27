@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Category--GameList</title>
+  </head>
+  <body>
+    <h1>Category--GameList</h1>
+    {% for category in categorygame_list %}
+    <h2>{{ category.category }}</h2>
+    <ol>
+        {% for game in category.games %}
+        <li>
+            Title: {{ game.title }}, ID: {{ game.id }}
+        </li>
+        {% endfor %}
+    </ol>
+{% endfor %}
+  </body>
+</html>
